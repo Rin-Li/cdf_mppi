@@ -65,13 +65,12 @@ $$
 - Slightly longer but safer trajectories  
 
 <p align="center">
-  <img src="Exp1_trajectory.pdf" width="45%"/>
+  <img src="Exp1_trajectory.png" width="45%"/>
 </p>
 
 <p align="center">
   <em>Comparison of trajectories in configuration space (left) and workspace (right).</em>
 </p>
-
 
 | Method | Success Rate (%) | Path Length | Avg. Steps |
 |--------|------------------|-------------|------------|
@@ -86,12 +85,11 @@ $$
 - Significantly higher success rate than QP and original MPPI in challenging environments  
 
 <p align="center">
-  <img src="Exp2_scene.pdf" width="45%"/>
-  <img src="Exp2_scene.pdf" width="45%"/>
+  <img src="Exp2_scene.png" width="45%"/>
 </p>
 
 <p align="center">
-  <em>Comparison of trajectories in configuration space (left) and workspace (right).</em>
+  <em>Comparison of trajectories in two scenarios with the 7-DOF Franka robot.</em>
 </p>
 
 | Method | Succ. (%) | Len. | Hz |
@@ -101,13 +99,3 @@ $$
 | MPPI (Original) | - | - | 61 / 28 |
 
 ---
-
-## Citation
-If you find this work useful, please cite:
-```bibtex
-@inproceedings{li2025cdfmppi,
-  title={Motion Planning with Configuration Space Distance Fields and MPPI},
-  author={Yulin Li and Tetsuro Miyazaki and Kenji Kawashima},
-  booktitle={IEEE International Conference on Robotics and Automation (ICRA)},
-  year={2025}
-}
