@@ -14,7 +14,7 @@
 - Slightly longer but safer trajectories  
 
 <p align="center">
-  <img src="Exp1_trajectory.png" width="45%"/>
+  <img src="Exp1_trajectory.png" width="100%"/>
 </p>
 
 <p align="center">
@@ -34,7 +34,7 @@
 - Significantly higher success rate than QP and original MPPI in challenging environments  
 
 <p align="center">
-  <img src="Exp2_scene.png" width="45%"/>
+  <img src="Exp2_scene.png" width="60%"/>
 </p>
 
 <p align="center">
