@@ -1,3 +1,5 @@
+# Reference from https://github.com/yimingli1998/cdf
+
 import torch
 from torch import nn
 from torch.nn import Sequential as Seq, Linear as Lin, ReLU

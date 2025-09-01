@@ -1,5 +1,7 @@
+# Reference from https://github.com/yimingli1998/cdf
+
 import numpy as np
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Tuple
 import casadi as ca
 
@@ -11,8 +13,8 @@ class QPConfig:
     dt: float = 0.01
     cons_u: float = 3.0
     planning_safety_buffer: float = 0.6
-    Q_diag: list[float] = [150, 190, 80, 70, 70, 90, 100]
-    R_diag: list[float] = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+    Q_diag: list[float] = field(default_factory=lambda: [150, 190, 80, 70, 70, 90, 100])
+    R_diag: list[float] = field(default_factory=lambda: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1])
     x_box_limit: float = 10.0
     
 
@@ -26,7 +28,7 @@ class QP:
         self.x_box_limit = cfg.x_box_limit
 
         self.Q = np.diag(cfg.Q_diag).astype(float)
-        self.R= np.diag(cfg.R_diag).astype(float)
+        self.R = np.diag(cfg.R_diag).astype(float)
         self.A, self.B = self.create_system_matrices(self.dof, self.dt)
 
         self.goal = cfg.goal
@@ -37,12 +39,12 @@ class QP:
         B = np.eye(n, dtype=np.float32) * float(dt)
         return A, B
     
-    def solve_qp(self, x0: np.ndarray, distance: float, gradient: np.ndarray):
+    def optimise(self, x0: np.ndarray, distance: float, gradient: np.ndarray):
         X = ca.MX.sym("X", self.dof, 2)   # k, k+1
         U = ca.MX.sym("U", self.dof, 1)
 
-        goal = ca.DM(self.goal_np)
-        cost = ca.mtimes((X[:, 1] - goal).T, ca.mtimes(self.Q, X[:, 1] - goal)) + ca.mtimes(U.T, ca.mtimes(R, U))
+        goal = ca.DM(self.goal)
+        cost = ca.mtimes((X[:, 1] - goal).T, ca.mtimes(self.Q, X[:, 1] - goal)) + ca.mtimes(U.T, ca.mtimes(self.R, U))
 
         # Constraints
         g = []
@@ -89,9 +91,13 @@ class QP:
 
         xvec = sol["x"][:self.dof*2].full().reshape(2, self.dof).T  
         uvec = sol["x"][self.dof*2:].full().reshape(self.dof, 1)     
-        return xvec.astype(np.float32), uvec.astype(np.float32)
+        
+        q_new = (self.A @ xvec[:, 0] + self.B @ uvec[:, 0]).astype(np.float32)
+        
+        return q_new
     
-    def optimise(self, q_curr)
+        
+        
         
     
     

@@ -1,3 +1,5 @@
+# Reference from https://github.com/yimingli1998/cdf
+
 import torch
 from cdf.mlp import MLPRegression
 

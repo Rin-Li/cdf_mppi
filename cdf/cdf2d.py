@@ -1,3 +1,5 @@
+# Reference from https://github.com/yimingli1998/cdf
+
 import torch
 import math
 from torchmin import minimize
