@@ -46,7 +46,7 @@
 </p>
 
 <p align="center">
-  <img src="img/cdf_mppi_cpmplex.gif" width="70%"/>
+  <img src="img/cdf_mppi_complex.gif" width="70%"/>
 </p>
 
 <p align="center">
