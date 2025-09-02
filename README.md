@@ -14,7 +14,7 @@
 - Slightly longer but safer trajectories  
 
 <p align="center">
-  <img src="Exp1_trajectory.png" width="100%"/>
+  <img src="img/Exp1_trajectory.png" width="100%"/>
 </p>
 
 <p align="center">
@@ -34,7 +34,23 @@
 - Significantly higher success rate than QP and original MPPI in challenging environments  
 
 <p align="center">
-  <img src="Exp2_scene.png" width="60%"/>
+  <img src="img/Exp2_scene.png" width="60%"/>
+</p>
+
+<p align="center">
+  <img src="img/cdf_mppi_cross.gif" width="70%"/>
+</p>
+
+<p align="center">
+  <em>GIF: Trajectories of CDF-MPPI and QP in the cross-shaped environment. The QP get into the local optimal and stuck in specified configuration.</em>
+</p>
+
+<p align="center">
+  <img src="img/cdf_mppi_cpmplex.gif" width="70%"/>
+</p>
+
+<p align="center">
+  <em>GIF: Trajectories of CDF-MPPI and QP in the ring and wall enviornemnt. The QP trajector is not smooth as the CDF-MPPI (it looks jittery).</em>
 </p>
 
 <p align="center">
