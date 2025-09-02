@@ -46,8 +46,8 @@ def main():
     from enviornment.linkrobot.robot2d_torch import Robot2D
     from enviornment.linkrobot.primitives2D_torch import Circle
     
-    from exp.linkrobot.utils import InputBounds, dynamics, plot_2link_with_obstacle
-    from exp.linkrobot.cost.cdf_mppi_cost import CostLinkRobotCDFMPPI, CostConfig
+    from exp.utils import InputBounds, dynamics, plot_2link_with_obstacle
+    from planner.cost.cdf_mppi_cost_link_robot import CostLinkRobotCDFMPPI, CostConfig
     from cdf.cdf2d import CDF2D
     import math
     

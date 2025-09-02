@@ -26,7 +26,8 @@ class CostLinkRobotCDFMPPI:
     def cost(self,
                 x_ref: torch.Tensor,     # [2]
                 x:      torch.Tensor,     # [2] (no batch dim)
-                u_batch: torch.Tensor):   # [N,2] (H=1)
+                u_batch: torch.Tensor
+                ):   # [N,2] (H=1)
         
         x_req = x.detach().requires_grad_(True)
         

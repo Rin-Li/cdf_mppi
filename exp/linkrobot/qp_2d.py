@@ -56,7 +56,7 @@ def main():
     from enviornment.linkrobot.robot2d_torch import Robot2D
     from enviornment.linkrobot.primitives2D_torch import Circle
     
-    from exp.linkrobot.utils import plot_2link_with_obstacle
+    from exp.utils import plot_2link_with_obstacle
     from cdf.cdf2d import CDF2D
     import math
     

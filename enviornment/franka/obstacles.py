@@ -48,10 +48,9 @@ class CrossObstacleManager:
             cz + offs_z
         ], dim=-1)
 
-        centers = torch.cat([centers_y, centers_z], dim=0)  # 保持 [水平, 垂直] 的固定顺序
+        centers = torch.cat([centers_y, centers_z], dim=0) 
         return centers
 
-    # -------- 为 CDF 构造点云：不依赖 unique ----------
     def cross_spheres_points_for_cdf(self, sphere_centers: torch.Tensor) -> torch.Tensor:
         all_pts = []
         for c in sphere_centers:
@@ -59,7 +58,6 @@ class CrossObstacleManager:
             all_pts.append(pts)
         return torch.cat(all_pts, dim=0)
 
-    # -------- 基于 step 的“论文式”运动：纯刚体平移 ----------
     def move_pts_step(
         self,
         step: int,
@@ -99,4 +97,5 @@ class CrossObstacleManager:
         pts = self.centers.detach().cpu()
         radii = torch.full((pts.shape[0], 1), float(r))
         return torch.cat([pts, radii], dim=1).numpy()
+
 
