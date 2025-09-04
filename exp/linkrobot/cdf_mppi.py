@@ -85,7 +85,7 @@ def main():
     
     cost_cfg = CostConfig(
         alpha1=2000.0,
-        alpha2=1000.0,
+        alpha2=3000.0,
         activate=0.5,
         cdf=cdf
     )
