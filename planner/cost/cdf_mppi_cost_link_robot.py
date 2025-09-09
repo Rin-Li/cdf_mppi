@@ -53,6 +53,3 @@ class CostLinkRobotCDFMPPI:
             cost = cost + self.alpha1 * penalty             
 
         return cost                                  
-
-    
-    
