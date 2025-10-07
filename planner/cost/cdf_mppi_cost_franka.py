@@ -52,6 +52,3 @@ class CostFrankaCDFMPPI:
             cost = cost + self.alpha1 * penalty             
 
         return cost                                  
-
-    
-    
