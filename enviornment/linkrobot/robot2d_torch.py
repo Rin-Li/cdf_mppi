@@ -1,3 +1,5 @@
+# Reference from https://github.com/yimingli1998/cdf
+
 import numpy as np
 import matplotlib.pyplot as plt
 import torch
