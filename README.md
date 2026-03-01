@@ -1,5 +1,8 @@
 # CDF-MPPI: Motion Planning with Configuration Space Distance Fields
 
+https://arxiv.org/abs/2509.00836
+Accepted by ICRA 2026
+
 ## Advantages
 - **Avoiding local optima**: The method eliminates optimization-based procedures, reducing the risk of convergence to local minima.  
 - **Unified cost function**: An angle-based cost function integrates goal-seeking and obstacle avoidance into a single metric with consistent units.  
