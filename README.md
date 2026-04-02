@@ -32,6 +32,18 @@ Accepted by ICRA 2026
 
 ---
 
+### Real Robot Experiment (UR3e)
+
+<p align="center">
+  <img src="img/Experiment_1.gif" width="80%"/>
+</p>
+
+<p align="center">
+  <em>GIF: CDF-MPPI deployed on a real UR3e robot arm for obstacle avoidance.</em>
+</p>
+
+---
+
 ### 7-DOF Franka Robot
 - Achieves **>750 Hz** control frequency  
 - Significantly higher success rate than QP and original MPPI in challenging environments  
