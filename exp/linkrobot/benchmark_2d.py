@@ -14,8 +14,7 @@ from cdf.cdf2d import CDF2D
 PI = math.pi
 GOAL_TOL = 0.1
 MAX_ITER = 5000
-N_TRIALS = 250
-MIN_DIST = 1.0   # min distance between start and goal in C-space
+N_TRIALS = 500
 
 
 def make_mppi(goal, device):
@@ -42,7 +41,7 @@ def make_mppi(goal, device):
 def run_trial(start, goal, cdf, circles, device):
     """Returns 'success', 'collision', or 'timeout'."""
     proj_fn = InputBounds(limits=[[-PI, PI], [-PI, PI]], dt=0.01).project_to_step_box
-    cost_cfg = CostConfig(alpha1=20.0, alpha2=10.0, activate=0.5, cdf=cdf)
+    cost_cfg = CostConfig(alpha1=20.0, alpha2=10.0, activate=0.8, cdf=cdf)
     cost_fn = CostLinkRobotCDFMPPI(cost_cfg, circles).cost
 
     cfg = MPPIConfig(
@@ -77,7 +76,7 @@ def sample_free(cdf, circles, device):
     while True:
         q = (torch.rand(1, 2, device=device) * 2 - 1) * PI
         h = cdf.calculate_cdf(q, circles).item()
-        if h > 0.1:
+        if h >= 0.8:
             return q.squeeze(0)
 
 
@@ -105,8 +104,6 @@ def main():
     for i in range(N_TRIALS):
         start = sample_free(cdf, circles, device)
         goal = sample_free(cdf, circles, device)
-        while (start - goal).norm() < MIN_DIST:
-            goal = sample_free(cdf, circles, device)
 
         status = run_trial(start, goal, cdf, circles, device)
         results[status] += 1

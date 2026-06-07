@@ -63,7 +63,7 @@ def main():
         Circle(center=torch.tensor([2.3, -2.3], device=device), radius=0.3, device=device),
         Circle(center=torch.tensor([0.0, 2.45], device=device), radius=0.3, device=device),
     ]
-    goal = torch.tensor([-2.1, 0.9], dtype=torch.float32, device=device)
+    goal = torch.tensor([-2.1, -0.9], dtype=torch.float32, device=device)
     start = torch.tensor([[2.1, 1.2]], dtype=torch.float32, device=device)
     
     
@@ -86,7 +86,7 @@ def main():
     cost_cfg = CostConfig(
         alpha1=20.0,
         alpha2=10.0,
-        activate=0.5,
+        activate=0.8,
         cdf=cdf
     )
     

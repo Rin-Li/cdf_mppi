@@ -3,6 +3,22 @@
 https://arxiv.org/abs/2509.00836
 Accepted by ICRA 2026
 
+## Demo
+
+Run the 2D two-link robot demo (generates trajectory plot and animation):
+
+```bash
+python -m exp.linkrobot.demo_2d
+```
+
+This saves `img/demo_cspace_workspace.png` (configuration space + workspace trajectories) and `img/demo_animation.gif`.
+
+<p align="center">
+  <img src="img/demo_cspace_workspace.png" width="100%"/>
+</p>
+
+---
+
 ## Installation
 
 ### Requirements

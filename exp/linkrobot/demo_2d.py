@@ -57,7 +57,7 @@ def run_planner(device):
         Circle(center=torch.tensor([2.3, -2.3], device=device), radius=0.3, device=device),
         Circle(center=torch.tensor([0.0,  2.45], device=device), radius=0.3, device=device),
     ]
-    goal  = torch.tensor([-2.1,  0.9], dtype=torch.float32, device=device)
+    goal  = torch.tensor([-2.1, -0.9], dtype=torch.float32, device=device)
     start = torch.tensor([ 2.1,  1.2], dtype=torch.float32, device=device)
 
     print('Computing q_0_level_set…')
@@ -65,7 +65,7 @@ def run_planner(device):
     print(f'  {cdf.q_0_level_set.shape[0]} boundary points')
 
     proj_fn  = InputBounds(limits=[[-PI, PI], [-PI, PI]], dt=0.01).project_to_step_box
-    cost_cfg = CostConfig(alpha1=20.0, alpha2=10.0, activate=0.5, cdf=cdf)
+    cost_cfg = CostConfig(alpha1=20.0, alpha2=10.0, activate=0.8, cdf=cdf)
     cost_fn  = CostLinkRobotCDFMPPI(cost_cfg, circles).cost
     mppi_cfg = MPPIConfig(
         d_action=2, goal=goal, horizon=1, n_samples=200, dt=0.01,
