@@ -34,6 +34,10 @@ class PandaSim():
                 self.bullet_client.resetJointState(self.panda, j, self.rp[index])
                 index = index + 1
 
+    def hard_reset(self, joint_positions):
+        for i in range(pandaNumDofs):
+            self.bullet_client.resetJointState(self.panda, i, float(joint_positions[i]))
+
     def set_joint_positions(self, joint_positions):
         for i in range(pandaNumDofs):
             self.bullet_client.setJointMotorControl2(self.panda, i, self.bullet_client.POSITION_CONTROL,
@@ -57,21 +61,24 @@ class SphereManager:
     def __init__(self, pybullet_client):
         self.pb = pybullet_client
         self.spheres = []
-        self.color = [.7, .1, .1, 1]
         self.color = [.63, .07, .185, 1]
-        # self.color = [0.8500, 0.3250, 0.0980, 1]
-    def create_sphere(self, position, radius, color):
-        sphere = self.pb.createVisualShape(self.pb.GEOM_SPHERE,
-                                           radius=radius,
-                                           rgbaColor=color, specularColor=[0, 0, 0, 1])
-        sphere = self.pb.createCollisionShape(self.pb.GEOM_SPHERE,
-                                                radius=radius)
-        
-        sphere = self.pb.createMultiBody(baseVisualShapeIndex=sphere,
-                                         basePosition=position)
-        self.spheres.append(sphere)
 
-    def initialize_spheres(self, obstacle_array):
+    @property
+    def body_ids(self):
+        return self.spheres
+
+    def create_sphere(self, position, radius, color):
+        col_shape = self.pb.createCollisionShape(self.pb.GEOM_SPHERE, radius=radius)
+        vis_shape = self.pb.createVisualShape(self.pb.GEOM_SPHERE,
+                                              radius=radius,
+                                              rgbaColor=color,
+                                              specularColor=[0, 0, 0, 1])
+        body = self.pb.createMultiBody(baseCollisionShapeIndex=col_shape,
+                                       baseVisualShapeIndex=vis_shape,
+                                       basePosition=position)
+        self.spheres.append(body)
+
+    def initialize_spheres(self, obstacle_array, collide_only=True, visible=True):
         for obstacle in obstacle_array:
             self.create_sphere(obstacle[0:3], obstacle[3], self.color)
 

@@ -52,7 +52,7 @@ def main():
     
     device = "cuda" if torch.cuda.is_available() else "cpu"
     obs = CrossObstacleManager(device=device)
-    cdf = CDF(device=device)
+    cdf = CDF(device=device, model_path="cdf/model_dict.pt")
     
     q0 = np.array([-1.57, 0.40000, 0.0000, -1.2708, 0.0000, 1.8675, 0.0000], dtype=np.float32)
     qf = np.array([ 1.57, 0.40000, 0.0000, -1.2708, 0.0000, 1.8675, 0.0000], dtype=np.float32)
@@ -89,9 +89,8 @@ def main():
     ], dt=mppi_cfg.dt).project_to_step_box
     
     obs_pts = obs.pts()
-    model = "cdf/model_dict.pt"
-    
-    cost_fn = CostFrankaCDFMPPI(cost_cfg, qf, obs_pts, model)
+
+    cost_fn = CostFrankaCDFMPPI(cost_cfg, obs_pts)
     
     
     franka_robot_planner = CDFMPPIFranka(

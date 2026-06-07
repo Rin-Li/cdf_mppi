@@ -7,7 +7,7 @@ from __future__ import annotations
 from typing import Tuple, List
 import pybullet as p
 import numpy as np
-from pybullet_panda_sim import PandaSim, SphereManager
+from enviornment.franka.pybullet_panda_sim import PandaSim, SphereManager
 
 
 def _get_robot_id_fallback() -> int:

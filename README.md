@@ -3,6 +3,56 @@
 https://arxiv.org/abs/2509.00836
 Accepted by ICRA 2026
 
+## Installation
+
+### Requirements
+- Python ≥ 3.12
+
+```bash
+git clone https://github.com/Rin-Li/cdf_mppi.git
+cd cdf_mppi
+pip install -r requirements.txt
+```
+
+> **Note:** `pytorch-minimize` wheels may not exist for all Python/torch versions. If the install fails, install it from source:
+> ```bash
+> pip install git+https://github.com/rfeinman/pytorch-minimize.git
+> ```
+
+### Optional: Franka 7-DOF experiment
+The Franka experiment additionally requires PyBullet (already in `requirements.txt`). It also loads a pretrained CDF network from `cdf/model_dict.pt`, which is already included in the repository.
+
+---
+
+## Quick Start
+
+All experiments are launched from `main.py`:
+
+```bash
+# 2D two-link robot — CDF-MPPI (default)
+python main.py --robot 2d --method cdf_mppi
+
+# 2D two-link robot — original MPPI baseline
+python main.py --robot 2d --method mppi
+
+# 2D two-link robot — QP/IPOPT baseline
+python main.py --robot 2d --method qp
+
+# 7-DOF Franka robot — CDF-MPPI (requires pybullet)
+python main.py --robot franka --method cdf_mppi
+```
+
+You can also run each experiment directly:
+
+```bash
+python -m exp.linkrobot.cdf_mppi   # 2D CDF-MPPI
+python -m exp.linkrobot.mppi_original  # 2D original MPPI
+python -m exp.linkrobot.qp_2d      # 2D QP
+python -m exp.franka.cdf_mppi      # Franka CDF-MPPI
+```
+
+---
+
 ## Advantages
 - **Avoiding local optima**: The method eliminates optimization-based procedures, reducing the risk of convergence to local minima.  
 - **Unified cost function**: An angle-based cost function integrates goal-seeking and obstacle avoidance into a single metric with consistent units.  

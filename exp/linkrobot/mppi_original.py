@@ -26,7 +26,7 @@ class MPPILinkRobot:
             x_next = self.mppi.rollout(x_cur)
             # print(f"✅ Step {k+1}: from {x_cur.cpu().numpy()} to {x_next.cpu().numpy()}")
             h_val_next = self.sdf.inference_sdf(
-                x_next, self.obs_list, return_grad=False
+                x_next.unsqueeze(0), self.obs_list, return_grad=False
             ).item()
             
             if h_val_next < 0:
@@ -53,7 +53,7 @@ def main():
     device = "cuda" if torch.cuda.is_available() else "cpu"
     
     robot = Robot2D()
-    sdf = SDF2D(device, robot)
+    sdf = SDF2D(robot, device)
     circles = [
         Circle(center=torch.tensor([2.3, -2.3], device=device), radius=0.3),
         Circle(center=torch.tensor([0.0, 2.45], device=device), radius=0.3),
@@ -79,6 +79,7 @@ def main():
     cost_cfg = CostConfig(
         q_min=torch.tensor([-PI, -PI], device=device),
         q_max=torch.tensor([PI, PI], device=device),
+        dt=mppi_cfg.dt,
         sdf=sdf
     )
     
