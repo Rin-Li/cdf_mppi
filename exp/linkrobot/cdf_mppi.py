@@ -55,13 +55,13 @@ def main():
     
     device = "cuda" if torch.cuda.is_available() else "cpu"
     
-    robot = Robot2D()
+    robot = Robot2D(device=device)
     q_max = torch.tensor([PI,PI]).to(device)
     q_min = torch.tensor([-PI,-PI]).to(device)
     cdf = CDF2D(device, robot, q_max, q_min)
     circles = [
-        Circle(center=torch.tensor([2.3, -2.3], device=device), radius=0.3),
-        Circle(center=torch.tensor([0.0, 2.45], device=device), radius=0.3),
+        Circle(center=torch.tensor([2.3, -2.3], device=device), radius=0.3, device=device),
+        Circle(center=torch.tensor([0.0, 2.45], device=device), radius=0.3, device=device),
     ]
     goal = torch.tensor([-2.1, 0.9], dtype=torch.float32, device=device)
     start = torch.tensor([[2.1, 1.2]], dtype=torch.float32, device=device)
@@ -84,8 +84,8 @@ def main():
     
     
     cost_cfg = CostConfig(
-        alpha1=2000.0,
-        alpha2=3000.0,
+        alpha1=20.0,
+        alpha2=10.0,
         activate=0.5,
         cdf=cdf
     )

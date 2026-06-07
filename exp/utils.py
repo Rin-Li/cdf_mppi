@@ -54,31 +54,32 @@ class InputBounds:
         self.dt = dt
         
     def step_u_bounds(self, q: torch.Tensor, limits, dt: float):
-        """_summary_
-
+        """Compute velocity bounds from joint limits
+        
         Args:
-            q (torch.Tensor): _description_
-            limits (_type_): _description_
-            dt (float): _description_
+            q (torch.Tensor): current joint configuration [n_joints]
+            limits (list): list of [min, max] for each joint
+            dt (float): time step
 
         Returns:
-            _type_: _description_
+            umin, umax: velocity bounds [n_joints]
         """
-        qmin = torch.tensor([limits[0][0], limits[1][0]], device=q.device, dtype=q.dtype)
-        qmax = torch.tensor([limits[0][1], limits[1][1]], device=q.device, dtype=q.dtype)
+        n_joints = len(limits)
+        qmin = torch.tensor([limits[i][0] for i in range(n_joints)], device=q.device, dtype=q.dtype)
+        qmax = torch.tensor([limits[i][1] for i in range(n_joints)], device=q.device, dtype=q.dtype)
         umin = (qmin - q) / dt
         umax = (qmax - q) / dt
-        return umin, umax  # [2], [2]
+        return umin, umax
 
     def project_to_step_box(self, u: torch.Tensor, q: torch.Tensor):
         """
         Project the control input u onto the feasible step box constraint:
         q + dt*u ∈ [qmin, qmax]
         Supported shapes:
-        - u: [2]                 -> returns [2]
-        - u: [N, H, 2] (H=1)     -> returns [N, H, 2]
+        - u: [n_joints]           -> returns [n_joints]
+        - u: [N, H, n_joints]     -> returns [N, H, n_joints]
         """
-        umin, umax = self.step_u_bounds(q, self.limits, self.dt)  # [2]
+        umin, umax = self.step_u_bounds(q, self.limits, self.dt)
         if u.dim() == 1:
             return torch.max(torch.min(u, umax), umin)
 
