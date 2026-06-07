@@ -29,6 +29,14 @@ pip install -r requirements.txt
 > pip install git+https://github.com/rfeinman/pytorch-minimize.git
 > ```
 
+Alternatively, if you have [uv](https://docs.astral.sh/uv/) installed:
+
+```bash
+git clone https://github.com/Rin-Li/cdf_mppi.git
+cd cdf_mppi
+uv sync
+```
+
 ### Optional: Franka 7-DOF experiment
 The Franka experiment additionally requires PyBullet (already in `requirements.txt`). It also loads a pretrained CDF network from `cdf/model_dict.pt`, which is already included in the repository.
 
