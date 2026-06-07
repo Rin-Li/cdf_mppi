@@ -13,12 +13,6 @@ python -m exp.linkrobot.demo_2d
 
 This saves `img/demo_cspace_workspace.png` (configuration space + workspace trajectories) and `img/demo_animation.gif`.
 
-<p align="center">
-  <img src="img/demo_cspace_workspace.png" width="100%"/>
-</p>
-
----
-
 ## Installation
 
 ### Requirements
